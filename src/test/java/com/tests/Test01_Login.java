@@ -37,7 +37,8 @@ public class Test01_Login extends BaseTest {
 	public void test02_CreateCategory() {
 		apiLoginSteps.loginAsAdmin();
 		Category category = apiCategorySteps.createCategory();
-		apiCategorySteps.deleteCategory(category);
+		apiCategorySteps.addImageToCategory(category);
+//		apiCategorySteps.deleteCategory(category);
 	}
 
 	@Test
