@@ -4,7 +4,7 @@ public class Item {
 
 	private String title;
 	private int category_id;
-	Object[] custom_fields;
+	private Object[] custom_fields;
 	private int id;
 	
 	
