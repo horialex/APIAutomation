@@ -19,25 +19,15 @@ public class AbstractApiSteps {
 
 	private static RequestSpecification tokenSpec = null;
 	public static Map<String, String> extraHeaders = new HashMap<String, String>();
-
-//	public static RequestSpecification getSpec() {
-//
-//		spec = new RequestSpecBuilder().setContentType(ContentType.JSON).addHeader("User-Agent-WW", "web_agent")
-//				.setBaseUri("https://www.whereswhat.com").build();
-//		return spec;
-//	}
 	
 	public static RequestSpecification getSpecWithExtraHeaders(){
-		
 		tokenSpec = new RequestSpecBuilder()
 				.setContentType(ContentType.JSON)
 				.setBaseUri("https://www.whereswhat.com/api")
 				.addHeader("User-Agent-WW", "web_agent")
 				.addHeaders(extraHeaders)
 				.build();
-		
 	return tokenSpec;
-	
 	}
 	
 	protected <T> T createResource (String path, Object requestBody, Class<T> responseClass) {
@@ -78,22 +68,5 @@ public class AbstractApiSteps {
 			.assertThat().statusCode(anyOf(is(201),is(204), is(200), is(302)))
 		    .extract().response().asString();
 	}
-
-
-//	@Step
-//	public void loginAsInitiator() {
-//
-//		String token = given().relaxedHTTPSValidation()
-//				.spec(getSpec())
-//				.formParam("user", "mihai.barta@evozon.com")
-//				.formParam("password", "deltaforce1")
-//				.when()
-//				.post("/sign_in")
-//				.then()
-//				.statusCode(200)
-//				.extract().path("authentication_token");
-//
-//		Serenity.getCurrentSession().put("token", token);
-//	}
 
 }
