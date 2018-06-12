@@ -15,15 +15,16 @@ public class ApiItemSteps extends AbstractApiSteps {
 	}
 
 	@Step
-	public void createItem(Category category) {
+	public Item createItem(Category category) {
 		Item itemRequest = ApiEntityFactory.getItemInstance();
 		itemRequest.setCategory_id(category.getId());
 		Item responseItem = createResource(ApiRequestPath.ITEMS, itemRequest, Item.class);
+		return responseItem;
 	}
 
 	@Step
 	public void deleteItem(Item item) {
-		deleteResource(ApiRequestPath.ITEMS + ApiRequestPath.PATH_SEPARATOR + item.getId());
+		deleteResource(ApiRequestPath.ITEMS, item.getId());
 	}
 
 }

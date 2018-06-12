@@ -19,7 +19,7 @@ public class ApiCategorySteps extends AbstractApiSteps {
 
 	@Step
 	public void deleteCategory(Category category) {
-		deleteResource(ApiRequestPath.CATEGORIES + ApiRequestPath.PATH_SEPARATOR + category.getId());
+		deleteResource(ApiRequestPath.CATEGORIES,  category.getId());
 	}
 
 	@Step()

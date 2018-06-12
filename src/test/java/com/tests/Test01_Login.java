@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.entities.Category;
+import com.entities.Item;
 import com.steps.api.ApiCategorySteps;
 import com.steps.api.ApiItemSteps;
 import com.steps.api.ApiLoginSteps;
@@ -28,7 +29,7 @@ public class Test01_Login extends BaseTest {
 	public ApiItemSteps apiItemSteps;
 
 	@Test
-	@Ignore
+//	@Ignore
 	public void test01_Login() {
 		apiLoginSteps.loginAsAdmin();
 	}
@@ -38,14 +39,15 @@ public class Test01_Login extends BaseTest {
 		apiLoginSteps.loginAsAdmin();
 		Category category = apiCategorySteps.createCategory();
 		apiCategorySteps.addImageToCategory(category);
-//		apiCategorySteps.deleteCategory(category);
+		apiCategorySteps.deleteCategory(category);
 	}
 
 	@Test
-	@Ignore
+//	@Ignore
 	public void test03_CreateItem() {
 		apiLoginSteps.loginAsAdmin();
 		Category category = apiCategorySteps.createCategory();
-		apiItemSteps.createItem(category);
+		Item item = apiItemSteps.createItem(category);
+		apiItemSteps.deleteItem(item);
 	}
 }

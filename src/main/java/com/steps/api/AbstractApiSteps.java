@@ -40,10 +40,10 @@ public class AbstractApiSteps {
 				.extract().as(responseClass);
 	}
 	
-	protected void deleteResource (String path) {
+	protected void deleteResource (String path, int id) {
 		given().relaxedHTTPSValidation()
 			.spec(getSpecWithExtraHeaders())
-			.when().delete(path)
+			.when().delete(path + "/" + id)
 			.then()
 			.assertThat().statusCode(anyOf(is(201),is(204), is(200), is(302)))
 		    .extract().response().asString();
