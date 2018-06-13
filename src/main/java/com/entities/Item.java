@@ -7,8 +7,6 @@ public class Item {
 	private Object[] custom_fields;
 	private int id;
 	
-	
-
 	public int getId() {
 		return id;
 	}

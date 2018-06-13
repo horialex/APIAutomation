@@ -5,5 +5,6 @@ import com.tools.persistence.PropertyFileReader;
 public interface EnvironmentConstants {
 
 	public static final String BASE_URL = PropertyFileReader.getEnvConstantsItem("BASE_URL");
-	public static final String FILE_DIR = "E:\\Work\\Automation\\WhereIsWhatAuto\\src\\test\\resources\\files\\";
+	public static final String RESOURCES_FOLDER = "\\src\\test\\resources\\files\\";
+	public static final String RESOURCES_PATH = System.getProperty("user.dir") + RESOURCES_FOLDER;
 }

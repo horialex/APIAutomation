@@ -30,6 +30,18 @@ public class AbstractApiSteps {
 	return tokenSpec;
 	}
 	
+	public static RequestSpecification getMultipartSpec(){
+		tokenSpec = new RequestSpecBuilder()
+				.setContentType(ContentType.JSON)
+				.setBaseUri("https://www.whereswhat.com/api")
+				.addHeader("User-Agent-WW", "web_agent")
+				.addHeader("Content-Type", "multipart/form-data")
+				.addHeaders(extraHeaders)
+				.build();
+	return tokenSpec;
+	}
+	
+	
 	protected <T> T createResource (String path, Object requestBody, Class<T> responseClass) {
 		return  given().relaxedHTTPSValidation()
 				.spec(getSpecWithExtraHeaders())
@@ -61,12 +73,11 @@ public class AbstractApiSteps {
 	
 	protected String uploadResource (String path, String fileName) {
 		return given().relaxedHTTPSValidation()
-			.spec(getSpecWithExtraHeaders())
-			.multiPart(new File(EnvironmentConstants.FILE_DIR + fileName))
+			.spec(getMultipartSpec())
+			.multiPart(new File(EnvironmentConstants.RESOURCES_PATH + fileName))
 			.when().post(path)
 			.then()
 			.assertThat().statusCode(anyOf(is(201),is(204), is(200), is(302)))
 		    .extract().response().asString();
 	}
-
 }

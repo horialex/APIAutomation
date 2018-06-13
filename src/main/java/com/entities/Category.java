@@ -1,5 +1,6 @@
 package com.entities;
 
+
 public class Category {
 
 	private String name;

@@ -1,6 +1,5 @@
 package com.tests;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -16,8 +15,8 @@ import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
-public class Test01_Login extends BaseTest {
-
+public class Test03_CreateItem extends BaseTest{
+	
 	@Managed(uniqueSession = true)
 	public WebDriver webdriver;
 
@@ -27,11 +26,12 @@ public class Test01_Login extends BaseTest {
 	public ApiCategorySteps apiCategorySteps;
 	@Steps
 	public ApiItemSteps apiItemSteps;
-
-	@Test
-	public void test01_Login() {
-		apiLoginSteps.loginAsAdmin();
-	}
-
 	
+	@Test
+	public void test03_CreateItem() {
+		apiLoginSteps.loginAsAdmin();
+		Category category = apiCategorySteps.createCategory();
+		Item item = apiItemSteps.createItem(category);
+		apiItemSteps.deleteItem(item);
+	}
 }

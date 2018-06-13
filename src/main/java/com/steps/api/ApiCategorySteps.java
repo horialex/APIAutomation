@@ -26,7 +26,6 @@ public class ApiCategorySteps extends AbstractApiSteps {
 	public void addImageToCategory(Category category) {
 		AbstractApiSteps.extraHeaders.put("Entity-Type", "category");
 		AbstractApiSteps.extraHeaders.put("Entity-Id", Integer.toString(category.getId()));
-		AbstractApiSteps.extraHeaders.put("Content-Type", "multipart/form-data");
 		uploadResource(ApiRequestPath.UPLOAD_IMAGE,  "costum.PNG");
 		AbstractApiSteps.extraHeaders.remove("Entity-Type");
 		AbstractApiSteps.extraHeaders.remove("Entity-Id");

@@ -11,6 +11,7 @@ public class ApiLoginSteps extends AbstractApiSteps {
 
 	@Step
 	public void loginAsAdmin() {
+		//sterge numai headerula auth
 		  AbstractApiSteps.extraHeaders.clear();
 		  Login loginRequest = ApiEntityFactory.getLoginInstance();
 		  String loginResponse = createResource(ApiRequestPath.LOGIN_PATH, loginRequest);
