@@ -1,5 +1,7 @@
 package com.tests;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -13,15 +15,16 @@ import net.thucydides.core.annotations.Steps;
 @RunWith(SerenityRunner.class)
 public class LoginTest_UI extends BaseTest{
 	
-	@Managed(uniqueSession = true)
-	public WebDriver webdriver;
-
+	
 	@Steps
 	public HomePageSteps homePageSteps;
 	
 	
 	@Test
 	public void test_login_ui() {
-		homePageSteps.navigateToLoginPage();
+		webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		webdriver.manage().window().maximize();
+		webdriver.get("http://www.google.com");  
+//		homePageSteps.navigateToLoginPage();
 	}
 }
