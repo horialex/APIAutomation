@@ -13,7 +13,8 @@ public class ApiEntityFactory {
 		Login login = new Login();
 		User user = new User();
 		user.setEmail("horatiu.encian@evozon.com");
-		user.setPassword("Jungla123.,");
+		//user.setPassword("Jungla123.,");
+		user.setPassword("testtest1");
 		login.setUser(user);
 		return login;
 	}
