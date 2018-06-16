@@ -44,6 +44,7 @@ public class ItemSteps extends AbstractSteps {
 	@Step
 	public void bookItem(Item item){
 		getCategoryPage().clickBookItem(item);
+		getCreateBookingPage().createBooking();
 	}
 	
 

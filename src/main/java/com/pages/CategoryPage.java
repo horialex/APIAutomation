@@ -39,6 +39,7 @@ public class CategoryPage extends PageObject{
 			if(name.getText().toLowerCase().trim().contentEquals(item.getTitle().toLowerCase())) {
 				WebElement bookButton = items.findElement(By.cssSelector(bookItemButtonCssSelector));
 				bookButton.click();
+				break;
 			}
 			
 		}
