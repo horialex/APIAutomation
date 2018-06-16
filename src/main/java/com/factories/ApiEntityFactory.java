@@ -1,5 +1,6 @@
 package com.factories;
 
+import java.util.Random;
 import java.util.UUID;
 
 import com.entities.Category;
@@ -20,13 +21,13 @@ public class ApiEntityFactory {
 
 	public static Category getCategoryInstance() {
 		Category cateogry = new Category();
-		cateogry.setName("Horatiu_Category_" + UUID.randomUUID().toString());
+		cateogry.setName("Horatiu_Category_" + randomString("abcdefgh", 5));
 		return cateogry;
 	}
 
 	public static Item getItemInstance() {
 		Item item = new Item();
-		item.setTitle(("Horatiu_Item_" + UUID.randomUUID().toString()));
+		item.setTitle(("Horatiu_Item_" + randomString("zsdsfa", 5)));
 		Object[] emptyArray = {};
 		item.setCustom_fields(emptyArray);
 		return item;
@@ -38,5 +39,14 @@ public class ApiEntityFactory {
 		user.setPassword("testtest1");
 		return user;
 	}
+	
+	public static String randomString(String chars, int length) {
+		  Random rand = new Random();
+		  StringBuilder buf = new StringBuilder();
+		  for (int i=0; i<length; i++) {
+		    buf.append(chars.charAt(rand.nextInt(chars.length())));
+		  }
+		  return buf.toString();
+		}
 
 }

@@ -1,8 +1,5 @@
 package com.tests;
 
-import java.util.concurrent.TimeUnit;
-
-import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 
@@ -17,18 +14,15 @@ public class BaseTest {
 		if(System.getProperty("runPlatform") == null) {
 			System.setProperty("runPlatform", "desktop");
 		}
-		webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		webdriver.manage().window().maximize();
-		webdriver.get("https://wwtest.evozon.com");
-//		System.setProperty("http.proxyHost", "localhost");
-//		System.setProperty("http.proxyPort", "8080");
-//		System.setProperty("https.proxyHost", "localhost");
-//		System.setProperty("https.proxyPort", "8080");
+		System.setProperty("http.proxyHost", "localhost");
+		System.setProperty("http.proxyPort", "8080");
+		System.setProperty("https.proxyHost", "localhost");
+		System.setProperty("https.proxyPort", "8080");
 	}
 	
-	@After
-	public void tearDown() {
-		webdriver.quit();
-	}
+//	@After
+//	public void tearDown() {
+//		webdriver.quit();
+//	}
 
 }

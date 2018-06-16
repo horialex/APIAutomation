@@ -1,15 +1,9 @@
 package com.steps;
 
-import com.entities.User;
-import com.factories.ApiEntityFactory;
-import com.pages.HomePage;
-
 import net.thucydides.core.annotations.Step;
 
 public class HomePageSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
-	
-	HomePage homePage;
 	
 	@Step
 	public void navigateToLoginPage() {
@@ -17,14 +11,12 @@ public class HomePageSteps extends AbstractSteps {
 	}
 	
 	@Step()
-	public void loginAsAdmin() {
-		User adminUser = ApiEntityFactory.getAdminUser();
-		getHomePage().login(adminUser.getEmail(), adminUser.getPassword());
+	public void navigateToItemsPage() {
+		getHeaderPage().clickItemsMenu();
 	}
 	
 	@Step()
-	public void verifyLoggedIn() {
-		getHeaderPage().verifyLoggedIn();
+	public void navigateToBookingsPage() {
+		getHeaderPage().clickBookingsMenu();
 	}
-
 }

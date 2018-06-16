@@ -23,7 +23,7 @@ public class AbstractApiSteps {
 	public static RequestSpecification getSpecWithExtraHeaders(){
 		tokenSpec = new RequestSpecBuilder()
 				.setContentType(ContentType.JSON)
-				.setBaseUri("https://www.whereswhat.com/api")
+				.setBaseUri("https://wwtest.evozon.com/api")
 				.addHeader("User-Agent-WW", "web_agent")
 				.addHeaders(extraHeaders)
 				.build();

@@ -7,4 +7,7 @@ public interface EnvironmentConstants {
 	public static final String BASE_URL = PropertyFileReader.getEnvConstantsItem("BASE_URL");
 	public static final String RESOURCES_FOLDER = "\\src\\test\\resources\\files\\";
 	public static final String RESOURCES_PATH = System.getProperty("user.dir") + RESOURCES_FOLDER;
+	public static final String MULTIPART_CODE = "208322840018787";	
+	public static final String MULTIPART_BOUNDRY = "---------------------------" + MULTIPART_CODE;
+	
 }
