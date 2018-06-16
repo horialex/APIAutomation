@@ -12,17 +12,17 @@ public class EndUserSteps extends AbstractSteps{
 
     @Step
     public void enters(String keyword) {
-    	getHeaderPage().enter_keywords(keyword);
+    	getDictionaryPage().enter_keywords(keyword);
     }
 
     @Step
     public void starts_search() {
-    	getHeaderPage().lookup_terms();
+    	getDictionaryPage().lookup_terms();
     }
 
     @Step
     public void should_see_definition(String definition) {
-        assertThat(getHeaderPage().getDefinitions(), hasItem(containsString(definition)));
+        assertThat(getDictionaryPage().getDefinitions(), hasItem(containsString(definition)));
     }
 
     @Step

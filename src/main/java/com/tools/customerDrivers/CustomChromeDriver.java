@@ -36,7 +36,6 @@ public class CustomChromeDriver implements DriverSource {
 		DesiredCapabilities cap = DesiredCapabilities.chrome();
 		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 		cap.setCapability(ChromeOptions.CAPABILITY, options);
-
 		return new ChromeDriver(cap);
 	}
 }
