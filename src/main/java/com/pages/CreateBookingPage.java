@@ -21,25 +21,13 @@ public class CreateBookingPage extends PageObject {
 	private WebElement confirmBookingButton;
 
 	public void createBooking(Booking booking) {
-		selectStartDate(booking.getStartDate());
-		selectEndDate(booking.getEndDate());
+		selectStartDate(booking.getStart_date());
+		selectEndDate(booking.getEnd_date());
 		confirmBookingButton.click();
 	}
 
 	public void selectStartDate(String startDate) {
-		final String OLD_FORMAT = "yyyy/MM/dd HH:mm a";
-		final String NEW_FORMAT = "dd/MM/yyyy HH:mm a";
-		String newDateString ="";
-		SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
-		Date d;
-		try {
-			d = sdf.parse(startDate);
-			sdf.applyPattern(NEW_FORMAT);
-			newDateString = sdf.format(d);
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
 
 		WebElement selectDate = getDriver().findElement(By.cssSelector("input#booking_start_date1"));
 		selectDate.click();
@@ -47,7 +35,7 @@ public class CreateBookingPage extends PageObject {
 		WebElement nextLink = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.next"));
 		WebElement midLink = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.picker-switch"));
 		WebElement previousLink = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.prev"));
-		String date_dd_MM_yyyy[] = (newDateString.split(" ")[0]).split("/");
+		String date_dd_MM_yyyy[] = (startDate.split(" ")[0]).split("/");
 		//an
 		int yearDiff = Integer.parseInt(date_dd_MM_yyyy[2]) - Calendar.getInstance().get(Calendar.YEAR);
 		midLink.click();
@@ -93,9 +81,9 @@ public class CreateBookingPage extends PageObject {
         //click time picker button
         selectTime.click();
         List<WebElement> allTime = getDriver().findElements(By.cssSelector("div.ui-timepicker-wrapper li"));
-        newDateString = newDateString.split(" ")[1]+" " + newDateString.split(" ")[2];
+        startDate = startDate.split(" ")[1]+" " + startDate.split(" ")[2];
         for (WebElement webElement : allTime) {
-        	if(webElement.getText().contentEquals(newDateString)) {
+        	if(webElement.getText().contentEquals(startDate)) {
                 webElement.click();
                 break;
             }
@@ -103,20 +91,6 @@ public class CreateBookingPage extends PageObject {
 	}
 
 	public void selectEndDate(String endDate) {
-//		final String OLD_FORMAT = "yyyy/MM/dd HH:mm a";
-//		final String NEW_FORMAT = "dd/MM/yyyy HH:mm a";
-//		String newDateString ="";
-//		SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
-//		Date d;
-//		try {
-//			d = sdf.parse(endDate);
-//			sdf.applyPattern(NEW_FORMAT);
-//			newDateString = sdf.format(d);
-//			
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println("END DATE IN NEW FORMAT IS " + newDateString);
 		
 		WebElement selectEndDate = getDriver().findElement(By.cssSelector("input#booking_start_date2"));
 		selectEndDate.click();

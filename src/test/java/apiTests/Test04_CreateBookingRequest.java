@@ -34,7 +34,6 @@ public class Test04_CreateBookingRequest extends BaseTest{
 		Category category = apiCategorySteps.createCategory();
 		Item item = apiItemSteps.createItem(category);
 		Booking booking = apiBookingSteps.createBookingRequest(item, user);
-		
 	}
 
 }
