@@ -49,8 +49,11 @@ public class ApiEntityFactory {
 		Date date = new Date();
 		
 		Booking booking = new Booking();
-		booking.setStartDate("17/06/2018 02:00 PM");
-		booking.setEndDate("17/06/2018 04:00 PM");
+		booking.setStartDate("2018/06/18 03:50 PM");
+//		booking.setEndDate("2018/06/18 04:00 PM");
+		
+//		booking.setStartDate("18/06/2018 03:50 PM");
+		booking.setEndDate("18/06/2018 04:00 PM");
 		booking.setClient_time(dateFormat.format(date));
 		return booking;
 	}
