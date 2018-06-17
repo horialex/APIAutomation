@@ -1,8 +1,11 @@
 package com.factories;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
-import java.util.UUID;
 
+import com.entities.Booking;
 import com.entities.Category;
 import com.entities.Item;
 import com.entities.Login;
@@ -37,7 +40,19 @@ public class ApiEntityFactory {
 		User user = new User();
 		user.setEmail("horatiu.encian@evozon.com");
 		user.setPassword("testtest1");
+		user.setFullName("Horatiu Encian");
 		return user;
+	}
+	
+	public static Booking getBooking() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		
+		Booking booking = new Booking();
+		booking.setStartDate("17/06/2018 02:00 PM");
+		booking.setEndDate("17/06/2018 04:00 PM");
+		booking.setClient_time(dateFormat.format(date));
+		return booking;
 	}
 	
 	public static String randomString(String chars, int length) {

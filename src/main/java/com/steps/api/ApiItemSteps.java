@@ -26,5 +26,7 @@ public class ApiItemSteps extends AbstractApiSteps {
 	public void deleteItem(Item item) {
 		deleteResource(ApiRequestPath.ITEMS, item.getId());
 	}
+	
+	
 
 }

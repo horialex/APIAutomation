@@ -1,5 +1,6 @@
 package com.steps;
 
+import com.entities.BookingsPage;
 import com.pages.CategoryPage;
 import com.pages.CreateBookingPage;
 import com.pages.CreateCategoryPage;
@@ -106,6 +107,18 @@ public class AbstractSteps extends ScenarioSteps {
 		case "mobile":
 			// mobile page object to be returned here
 			return getPages().currentPageAt(CreateBookingPage.class);
+		default:
+			return null;
+		}
+	}
+	
+	public BookingsPage getBookingsPage() {
+		switch (System.getProperty("runPlatform")) {
+		case "desktop":
+			return getPages().currentPageAt(BookingsPage.class);
+		case "mobile":
+			// mobile page object to be returned here
+			return getPages().currentPageAt(BookingsPage.class);
 		default:
 			return null;
 		}

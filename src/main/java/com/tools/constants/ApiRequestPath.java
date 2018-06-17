@@ -8,5 +8,6 @@ public interface ApiRequestPath {
 	public static final String ITEMS = "/Items";
 	public static final String UPLOAD_IMAGE = "/FileUpload/file_image";
 	public static final String CSV_UPLOAD = "/FileUpload/csv";
+	public static final String BOOKING = "/Bookings";
 
 }

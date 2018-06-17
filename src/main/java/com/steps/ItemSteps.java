@@ -1,5 +1,6 @@
 package com.steps;
 
+import com.entities.Booking;
 import com.entities.Category;
 import com.entities.Item;
 import com.factories.ApiEntityFactory;
@@ -43,8 +44,9 @@ public class ItemSteps extends AbstractSteps {
 	
 	@Step
 	public void bookItem(Item item){
+		Booking booking = ApiEntityFactory.getBooking();
 		getCategoryPage().clickBookItem(item);
-		getCreateBookingPage().createBooking();
+		getCreateBookingPage().createBooking(booking);
 	}
 	
 
