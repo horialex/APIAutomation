@@ -47,13 +47,9 @@ public class ApiEntityFactory {
 	public static Booking getBooking() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
-		
 		Booking booking = new Booking();
-//		booking.setStartDate("2018/06/18 03:50 PM");
-//		booking.setEndDate("2018/06/18 04:00 PM");
-		
-		booking.setStart_date("18/06/2018 03:50 PM");
-		booking.setEnd_date("18/06/2018 04:00 PM");
+		booking.setStart_date("19/06/2018 03:50 PM");
+		booking.setEnd_date("19/06/2018 04:00 PM");
 		booking.setClient_time(dateFormat.format(date));
 		return booking;
 	}

@@ -8,12 +8,12 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.entities.Category;
+import com.jayway.restassured.builder.MultiPartSpecBuilder;
 import com.jayway.restassured.builder.RequestSpecBuilder;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.tools.constants.EnvironmentConstants;
-
-import net.serenitybdd.core.Serenity;
 
 public class AbstractApiSteps {
 
@@ -33,8 +33,21 @@ public class AbstractApiSteps {
 	public static RequestSpecification getMultipartSpec(){
 		tokenSpec = new RequestSpecBuilder()
 				.setContentType(ContentType.JSON)
-				.setBaseUri("https://www.whereswhat.com/api")
+				.setBaseUri("https://wwtest.evozon.com/api")
 				.addHeader("User-Agent-WW", "web_agent")
+				.addHeader("Content-Type", "multipart/form-data")
+				.addHeaders(extraHeaders)
+				.build();
+	return tokenSpec;
+	}
+	
+	public static RequestSpecification getCsvMultipartSpec(){
+		tokenSpec = new RequestSpecBuilder()
+				.setContentType(ContentType.JSON)
+				.setBaseUri("https://wwtest.evozon.com/api")
+				.addHeader("User-Agent-WW", "web_agent")
+				.addHeader("Entity-Type", "item")
+				.addHeader("Host", "wwtest.evozon.com")
 				.addHeader("Content-Type", "multipart/form-data")
 				.addHeaders(extraHeaders)
 				.build();
@@ -80,4 +93,25 @@ public class AbstractApiSteps {
 			.assertThat().statusCode(anyOf(is(201),is(204), is(200), is(302)))
 		    .extract().response().asString();
 	}
+	
+	protected String uploadCSVResource (String path, String fileName) {
+		 return given().relaxedHTTPSValidation()
+			.spec(getCsvMultipartSpec())
+			.multiPart(new MultiPartSpecBuilder(new File(EnvironmentConstants.CSV_RESOURCES_PATH + fileName)).fileName(fileName).mimeType("application/vnd.ms-excel").build())
+			.when().post(path)
+			.then()
+			.assertThat().statusCode(anyOf(is(201),is(204), is(200), is(302)))
+		    .extract().response().asString();
+	}
+	
+	protected String createItemFromCSV(String path, String fileName, Category category) {
+		 return given().relaxedHTTPSValidation()
+					.spec(getCsvMultipartSpec())
+					.when().post(path + "?filename=" + fileName + "&" + "category_id="+category.getId())
+					.then()
+					.assertThat().statusCode(anyOf(is(201),is(204), is(200), is(302)))
+				    .extract().response().asString();
+	}
+	
+	
 }
