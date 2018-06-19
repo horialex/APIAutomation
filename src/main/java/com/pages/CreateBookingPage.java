@@ -1,9 +1,6 @@
 package com.pages;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -20,6 +17,23 @@ public class CreateBookingPage extends PageObject {
 	@FindBy(css = "button#create-booking-action")
 	private WebElement confirmBookingButton;
 
+	@FindBy(css = "input#booking_start_date1")
+	private WebElement calendarStartDate;
+
+	@FindBy(css = "input#booking_start_date2")
+	private WebElement calendarEndDate;
+
+	private String calendarNextButtonCssSelector = "div[style*='block'] div.datepicker > div.datepicker-months > table > thead > tr.pickerHeader th.next";
+	private String calendarMidButtonCssSelector = "div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.picker-switch";
+	private String calendarPreviousButtonCssSelector = "div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.prev";
+
+	private String calendarMonthListCssSelector = "div[style*='block'] div.datepicker > div.datepicker-months > table tbody > tr > td > span[class^='month']";
+	private String calendarDaysListCssSelector = "div[style*='block'] div.datepicker  div.datepicker-days tbody tr td[class='day']";
+	private String calendarCurrentDayCssSelector = "div[style*='block'] div.datepicker  div.datepicker-days tbody tr td[class*='today']";
+	private String calendarStartTimeCssSelector = "input[class^='booking_start_hour']";
+	private String calendarEndTimeCssSelector = "input[class^='booking_end_hour']";
+	private String calendarHoursListCssSelector = "div.ui-timepicker-wrapper li";
+
 	public void createBooking(Booking booking) {
 		selectStartDate(booking.getStart_date());
 		selectEndDate(booking.getEnd_date());
@@ -27,130 +41,126 @@ public class CreateBookingPage extends PageObject {
 	}
 
 	public void selectStartDate(String startDate) {
-		
-
-		WebElement selectDate = getDriver().findElement(By.cssSelector("input#booking_start_date1"));
-		selectDate.click();
-		waitFor(ExpectedConditions.visibilityOf(getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.next"))));
-		WebElement nextLink = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.next"));
-		WebElement midLink = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.picker-switch"));
-		WebElement previousLink = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.prev"));
-		String date_dd_MM_yyyy[] = (startDate.split(" ")[0]).split("/");
-		//an
-		int yearDiff = Integer.parseInt(date_dd_MM_yyyy[2]) - Calendar.getInstance().get(Calendar.YEAR);
-		midLink.click();
-
-		if (yearDiff != 0) {
-			// if you have to move next year
-			if (yearDiff > 0) {
-				for (int i = 0; i < yearDiff; i++) {
-					getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div.datepicker-months > table > thead > tr.pickerHeader th.next")).click();
-				}
-			}
-			// if you have to move previous year
-			else if (yearDiff < 0) {
-				for (int i = 0; i < (yearDiff * (-1)); i++) {
-					getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div.datepicker-months > table > thead > tr.pickerHeader th.prev")).click();
-				}
-			}
-		}
+		calendarStartDate.click();
+		waitFor(ExpectedConditions.visibilityOf(getDriver().findElement(
+				By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.next"))));
+		selectYear(startDate);
 		waitFor(500);
-		//luna
-		List<WebElement> list_AllMonthToBook = getDriver().findElements(By.cssSelector("div[style*='block'] div.datepicker > div.datepicker-months > table tbody > tr > td > span[class^='month']"));
-		list_AllMonthToBook.get(Integer.parseInt(date_dd_MM_yyyy[1])-1).click();
-		
-		Calendar calendar = Calendar.getInstance();
-		int currentDay = calendar.get(Calendar.DATE); 
-		List<WebElement> list_AllDateToBook = getDriver().findElements(By.cssSelector("div[style*='block'] div.datepicker  div.datepicker-days tbody tr td[class='day']"));
-		
-		String expectedDay = Integer.toString(Integer.parseInt(date_dd_MM_yyyy[0]));
-		if(Integer.toString(currentDay).contentEquals(expectedDay)) {
-			WebElement currentDayInCalendar = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker  div.datepicker-days tbody tr td[class*='today']"));
-			currentDayInCalendar.click();
-		}else {
-			for(WebElement day : list_AllDateToBook) {
-				if(day.getText().contentEquals(expectedDay)) {
-					day.click();
-					break;
-				}
-			}
-		}
-		
-        ///selecteaza timpul
-        WebElement selectTime = getDriver().findElement(By.cssSelector("input[class^='booking_start_hour']"));
-        //click time picker button
-        selectTime.click();
-        List<WebElement> allTime = getDriver().findElements(By.cssSelector("div.ui-timepicker-wrapper li"));
-        startDate = startDate.split(" ")[1]+" " + startDate.split(" ")[2];
-        for (WebElement webElement : allTime) {
-        	if(webElement.getText().contentEquals(startDate)) {
-                webElement.click();
-                break;
-            }
-        }
+		selectMonth(startDate);
+		selectDay(startDate);
+		selectStartTime(startDate);
 	}
 
 	public void selectEndDate(String endDate) {
-		
-		WebElement selectEndDate = getDriver().findElement(By.cssSelector("input#booking_start_date2"));
-		selectEndDate.click();
+		calendarEndDate.click();
+		waitFor(ExpectedConditions.visibilityOf(getDriver().findElement(
+				By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.next"))));
+		selectEndYear(endDate);
 		waitFor(500);
-		waitFor(ExpectedConditions.visibilityOf(getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.next"))));
-		WebElement nextLink = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.next"));
-		WebElement midLink = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.picker-switch"));
-		WebElement previousLink = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.prev"));
-				
-		String date_dd_MM_yyyy[] = (endDate.split(" ")[0]).split("/");
-		//an
+		selectMonth(endDate);
+		selectDay(endDate);
+		selectEndTime(endDate);
+	}
+
+	public void selectYear(String date) {
+		String date_dd_MM_yyyy[] = (date.split(" ")[0]).split("/");
+		WebElement midLink = getDriver().findElement(By.cssSelector(calendarMidButtonCssSelector));
 		int yearDiff = Integer.parseInt(date_dd_MM_yyyy[2]) - Calendar.getInstance().get(Calendar.YEAR);
 		midLink.click();
 		if (yearDiff != 0) {
 			// if you have to move next year
 			if (yearDiff > 0) {
 				for (int i = 0; i < yearDiff; i++) {
-					getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div.datepicker-months > table > thead > tr.pickerHeader th.next")).click();
+					getDriver().findElement(By.cssSelector(calendarNextButtonCssSelector)).click();
 				}
 			}
 			// if you have to move previous year
 			else if (yearDiff < 0) {
 				for (int i = 0; i < (yearDiff * (-1)); i++) {
-					getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker > div.datepicker-months > table > thead > tr.pickerHeader th.prev")).click();
+					getDriver().findElement(By.cssSelector(calendarPreviousButtonCssSelector)).click();
 				}
 			}
 		}
-		
-		waitFor(500);
-		//month
-		List<WebElement> list_AllMonthToBook = getDriver().findElements(By.cssSelector("div[style*='block'] div.datepicker > div.datepicker-months > table tbody > tr > td > span[class^='month']"));
-		list_AllMonthToBook.get(Integer.parseInt(date_dd_MM_yyyy[1])-1).click();
-		
-		//day
+	}
+
+	public void selectEndYear(String date) {
+		String date_dd_MM_yyyy[] = (date.split(" ")[0]).split("/");
+		WebElement midLink = getDriver().findElement(By.cssSelector(calendarMidButtonCssSelector));
+		String calendarNumbers = midLink.getText().replaceAll("[^0-9]", "");
+		int calendarEndYear = Integer.parseInt(calendarNumbers);
+		int yearDiff = Integer.parseInt(date_dd_MM_yyyy[2]) - calendarEndYear;
+		midLink.click();
+		if (yearDiff != 0) {
+			// if you have to move next year
+			if (yearDiff > 0) {
+				for (int i = 0; i < yearDiff; i++) {
+					getDriver().findElement(By.cssSelector(calendarNextButtonCssSelector)).click();
+				}
+			}
+			// if you have to move previous year
+			else if (yearDiff < 0) {
+				for (int i = 0; i < (yearDiff * (-1)); i++) {
+					getDriver().findElement(By.cssSelector(calendarPreviousButtonCssSelector)).click();
+				}
+			}
+		}
+	}
+
+	public void selectMonth(String date) {
+		String date_dd_MM_yyyy[] = (date.split(" ")[0]).split("/");
+		List<WebElement> list_AllMonthToBook = getDriver().findElements(By.cssSelector(calendarMonthListCssSelector));
+		list_AllMonthToBook.get(Integer.parseInt(date_dd_MM_yyyy[1]) - 1).click();
+	}
+
+	public void selectDay(String date) {
+		String date_dd_MM_yyyy[] = (date.split(" ")[0]).split("/");
 		Calendar calendar = Calendar.getInstance();
-		int currentDay = calendar.get(Calendar.DATE); 
-		List<WebElement> list_AllDateToBook = getDriver().findElements(By.cssSelector("div[style*='block'] div.datepicker  div.datepicker-days tbody tr td[class='day']"));
-		
-		String expectedDay = Integer.toString(Integer.parseInt(date_dd_MM_yyyy[0]));
-		if(Integer.toString(currentDay).contentEquals(expectedDay)) {
-			WebElement currentDayInCalendar = getDriver().findElement(By.cssSelector("div[style*='block'] div.datepicker  div.datepicker-days tbody tr td[class*='today']"));
+		int currentYear = calendar.get(Calendar.YEAR);
+		int currentMonth = calendar.get(Calendar.MONTH);
+		int currentDay = calendar.get(Calendar.DATE);
+
+		List<WebElement> list_AllDateToBook = getDriver().findElements(By.cssSelector(calendarDaysListCssSelector));
+		int expectedYear = Integer.parseInt(date_dd_MM_yyyy[2]);
+		int expectedMonth = (Integer.parseInt(date_dd_MM_yyyy[1])-1);
+		int expectedDay = Integer.parseInt(date_dd_MM_yyyy[0]);
+
+		if ((currentYear == expectedYear) && (currentMonth == expectedMonth) && (currentDay == expectedDay)) {
+			WebElement currentDayInCalendar = getDriver().findElement(By.cssSelector(calendarCurrentDayCssSelector));
 			currentDayInCalendar.click();
-		}else {
-			for(WebElement day : list_AllDateToBook) {
-				if(day.getText().contentEquals(expectedDay)) {
+		} else {
+			for (WebElement day : list_AllDateToBook) {
+				if (day.getText().contentEquals(Integer.toString(expectedDay))) {
 					day.click();
 					break;
 				}
 			}
 		}
-		//Selcteaza timpul
-        WebElement selectTime = getDriver().findElement(By.cssSelector("input[class^='booking_end_hour']"));	
-        selectTime.click();
-        List<WebElement> allTime = getDriver().findElements(By.cssSelector("div.ui-timepicker-wrapper li"));
-        endDate = endDate.split(" ")[1]+" "+ endDate.split(" ")[2];
-        for (WebElement webElement : allTime) {
-        	if(webElement.getText().contentEquals(endDate)) {
-                webElement.click();
-                break;
-            }
-        }
+	}
+	
+	public void selectStartTime(String startDate) {
+		WebElement selectTime = getDriver().findElement(By.cssSelector(calendarStartTimeCssSelector));
+		// click time picker button
+		selectTime.click();
+		List<WebElement> allTime = getDriver().findElements(By.cssSelector(calendarHoursListCssSelector));
+		startDate = startDate.split(" ")[1] + " " + startDate.split(" ")[2];
+		for (WebElement webElement : allTime) {
+			if (webElement.getText().contentEquals(startDate)) {
+				webElement.click();
+				break;
+			}
+		}
+	}
+	
+	public void selectEndTime(String endDate) {
+		WebElement selectTime = getDriver().findElement(By.cssSelector(calendarEndTimeCssSelector));
+		selectTime.click();
+		List<WebElement> allTime = getDriver().findElements(By.cssSelector(calendarHoursListCssSelector));
+		endDate = endDate.split(" ")[1] + " " + endDate.split(" ")[2];
+		for (WebElement webElement : allTime) {
+			if (webElement.getText().contentEquals(endDate)) {
+				webElement.click();
+				break;
+			}
+		}
 	}
 }
