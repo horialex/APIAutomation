@@ -95,7 +95,7 @@ public class AbstractApiSteps {
 	
 	protected String uploadCSVResource (String path, String fileName) {
 		 return given().relaxedHTTPSValidation()
-			.spec(getCsvMultipartSpec())
+			.spec(getMultipartSpec())
 			.multiPart(new MultiPartSpecBuilder(new File(System.getProperty("user.dir") + EnvironmentConstants.CSV_RESOURCES_PATH + fileName)).fileName(fileName).mimeType("application/vnd.ms-excel").build())
 			.when().post(path)
 			.then()
@@ -105,7 +105,7 @@ public class AbstractApiSteps {
 	
 	protected String createItemFromCSV(String path, String fileName, Category category) {
 		 return given().relaxedHTTPSValidation()
-					.spec(getCsvMultipartSpec())
+					.spec(getMultipartSpec())
 					.when().post(path + "?filename=" + fileName + "&" + "category_id="+category.getId())
 					.then()
 					.assertThat().statusCode(anyOf(is(201),is(204), is(200), is(302)))
