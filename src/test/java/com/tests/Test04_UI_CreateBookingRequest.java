@@ -47,5 +47,4 @@ public class Test04_UI_CreateBookingRequest extends BaseTest {
 		bookingSteps.navigateToMyBookingsTab();
 		bookingSteps.verifyBooking(item);
 	}
-
 }
