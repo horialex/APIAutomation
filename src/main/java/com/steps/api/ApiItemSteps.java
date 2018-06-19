@@ -30,11 +30,13 @@ public class ApiItemSteps extends AbstractApiSteps {
 
 	@Step
 	public void createItemFromCsv(Category category) {
+		AbstractApiSteps.extraHeaders.put("Entity-Type", "item");
 		String csvFile = "zzCat1.csv";
 		String fileName = uploadCSVResource(ApiRequestPath.CSV_UPLOAD, csvFile);
 		JsonPath jsonPath = new JsonPath(fileName);
 		String fileProcessed = jsonPath.get("file");
 		createItemFromCSV(ApiRequestPath.PROCESS_CSV_FILE, fileProcessed, category);
+		AbstractApiSteps.extraHeaders.remove("Entity-Type");
 	}
 
 }
