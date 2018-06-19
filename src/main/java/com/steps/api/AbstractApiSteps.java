@@ -46,7 +46,6 @@ public class AbstractApiSteps {
 				.setContentType(ContentType.JSON)
 				.setBaseUri("https://wwtest.evozon.com/api")
 				.addHeader("User-Agent-WW", "web_agent")
-				.addHeader("Entity-Type", "item")
 				.addHeader("Host", "wwtest.evozon.com")
 				.addHeader("Content-Type", "multipart/form-data")
 				.addHeaders(extraHeaders)
