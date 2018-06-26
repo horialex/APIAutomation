@@ -1,11 +1,13 @@
 package com.tests;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.entities.Category;
 import com.entities.Item;
 import com.steps.BookingSteps;
+import com.steps.CategoriesSteps;
 import com.steps.HomePageSteps;
 import com.steps.ItemSteps;
 import com.steps.LoginSteps;
@@ -33,18 +35,27 @@ public class Test04_UI_CreateBookingRequest extends BaseTest {
 	public ItemSteps itemSteps;
 	@Steps
 	public BookingSteps bookingSteps;
+	@Steps
+	public CategoriesSteps categoriesSteps;
+
+	Category category;
+	Item item;
+
+	@Before
+	public void dataPreparation() {
+		apiLoginSteps.loginAsAdmin();
+		category = apiCategorySteps.createCategory();
+		item = apiItemSteps.createItem(category);
+		loginSteps.loginAsAdmin();
+	}
 
 	@Test
 	public void test04_UT_createBookingRequest() throws InterruptedException {
-		apiLoginSteps.loginAsAdmin();
-		Category category = apiCategorySteps.createCategory();
-		Item item = apiItemSteps.createItem(category);
-		loginSteps.loginAsAdmin();
-		homePageSteps.navigateToItemsPage();
-		itemSteps.navigateToCategory(category);
+		homePageSteps.selectMenuOption("ITEMS");
+		categoriesSteps.navigateToCategory(category);
 		itemSteps.bookItem(item);
-		homePageSteps.navigateToBookingsPage();
-		bookingSteps.navigateToMyBookingsTab();
+		homePageSteps.selectMenuOption("BOOKINGS");
+		bookingSteps.selectBookingsAction("My Bookings");
 		bookingSteps.verifyBooking(item);
 	}
 }

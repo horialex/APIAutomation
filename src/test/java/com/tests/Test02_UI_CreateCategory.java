@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.entities.Category;
+import com.steps.CategoriesSteps;
 import com.steps.HomePageSteps;
 import com.steps.ItemSteps;
 import com.steps.LoginSteps;
@@ -19,15 +20,15 @@ public class Test02_UI_CreateCategory extends BaseTest {
 	@Steps
 	public LoginSteps loginSteps;
 	@Steps
-	public ItemSteps itemSteps;
+	public CategoriesSteps categoriesSteps;
 	
 	@Test
 	public void test02_UI_CreateCategory() {
 		loginSteps.loginAsAdmin();
-		homePageSteps.navigateToItemsPage();
-		Category category = itemSteps.createCategory();
+		homePageSteps.selectMenuOption("ITEMS");
+		Category category = categoriesSteps.createCategory();
 		webdriver.navigate().refresh();
-		itemSteps.verifyCategoryExists(category);
+		categoriesSteps.verifyCategoryPresence(category, true);
 	}
 
 }

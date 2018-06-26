@@ -26,7 +26,6 @@ public class CreateBookingPage extends PageObject {
 	private String calendarNextButtonCssSelector = "div[style*='block'] div.datepicker > div.datepicker-months > table > thead > tr.pickerHeader th.next";
 	private String calendarMidButtonCssSelector = "div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.picker-switch";
 	private String calendarPreviousButtonCssSelector = "div[style*='block'] div.datepicker > div > table > thead > tr.pickerHeader th.prev";
-
 	private String calendarMonthListCssSelector = "div[style*='block'] div.datepicker > div.datepicker-months > table tbody > tr > td > span[class^='month']";
 	private String calendarDaysListCssSelector = "div[style*='block'] div.datepicker  div.datepicker-days tbody tr td[class='day']";
 	private String calendarCurrentDayCssSelector = "div[style*='block'] div.datepicker  div.datepicker-days tbody tr td[class*='today']";

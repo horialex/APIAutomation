@@ -22,11 +22,11 @@ public class ApiEntityFactory {
 		return login;
 	}
 
-	public static Category getCategoryInstance() {
-		Category cateogry = new Category();
-		cateogry.setName("Horatiu_Category_" + randomString("abcdefgh", 5));
-		return cateogry;
-	}
+//	public static Category getCategoryInstance() {
+//		Category cateogry = new Category();
+//		cateogry.setName("Horatiu_Category_" + randomString("abcdefgh", 5));
+//		return cateogry;
+//	}
 
 	public static Item getItemInstance() {
 		Item item = new Item();

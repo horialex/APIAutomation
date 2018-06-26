@@ -6,6 +6,7 @@ import com.factories.ApiEntityFactory;
 import com.jayway.restassured.path.json.JsonPath;
 import com.tools.constants.ApiRequestPath;
 
+import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
 
 public class ApiLoginSteps extends AbstractApiSteps {
@@ -22,7 +23,7 @@ public class ApiLoginSteps extends AbstractApiSteps {
 	}
 	
 	@Step
-	public User loginAsAdminUser() {
+	public void loginAsAdminUser() {
 		//sterge numai headerula auth
 		  AbstractApiSteps.extraHeaders.clear();
 		  Login loginRequest = ApiEntityFactory.getLoginInstance();
@@ -33,7 +34,9 @@ public class ApiLoginSteps extends AbstractApiSteps {
 		  AbstractApiSteps.extraHeaders.put("Authorization", "Basic " + token);
 		  User user = new User();
 		  user.setId(user_id);
-		  return user;
+		  
+		  Serenity.setSessionVariable(user);
+//		  return user;
 	}
 
 }

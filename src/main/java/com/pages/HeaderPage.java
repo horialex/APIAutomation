@@ -33,18 +33,9 @@ public class HeaderPage extends PageObject{
 		for(WebElement element : headerMenuList) {
 			if(element.getText().toLowerCase().contentEquals(menuOption.toLowerCase())) {
 				element.click();
+				break;
 			}
 		}
 	}
 	
-	public void clickItemsMenu() {
-		WebDriverWait wait2 = new WebDriverWait(getDriver(), 10);
-		wait2.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='#items']")));
-		itemsMenuButton.click();
-	}
-	
-	public void clickBookingsMenu() {
-		bookingsMenuButton.click();
-	}
-
 }

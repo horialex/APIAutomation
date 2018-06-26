@@ -1,14 +1,14 @@
 package com.steps;
 
 import com.entities.BookingsPage;
+import com.pages.CategoriesPage;
 import com.pages.CategoryPage;
 import com.pages.CreateBookingPage;
 import com.pages.CreateCategoryPage;
 import com.pages.CreateItemPage;
-import com.pages.DictionaryPage;
 import com.pages.HeaderPage;
 import com.pages.HomePage;
-import com.pages.ItemsPage;
+import com.pages.LoginPage;
 
 import net.thucydides.core.steps.ScenarioSteps;
 
@@ -16,17 +16,6 @@ public class AbstractSteps extends ScenarioSteps {
 
 	private static final long serialVersionUID = 1L;
 
-	public DictionaryPage getDictionaryPage() {
-		switch (System.getProperty("runPlatform")) {
-		case "desktop":
-			return getPages().currentPageAt(DictionaryPage.class);
-		case "mobile":
-			// mobile page object to be returned here
-			return getPages().currentPageAt(DictionaryPage.class);
-		default:
-			return null;
-		}
-	}
 
 	public HomePage getHomePage() {
 		switch (System.getProperty("runPlatform")) {
@@ -52,13 +41,13 @@ public class AbstractSteps extends ScenarioSteps {
 		}
 	}
 	
-	public ItemsPage getItemPage() {
+	public CategoriesPage getCategoriesPage() {
 		switch (System.getProperty("runPlatform")) {
 		case "desktop":
-			return getPages().currentPageAt(ItemsPage.class);
+			return getPages().currentPageAt(CategoriesPage.class);
 		case "mobile":
 			// mobile page object to be returned here
-			return getPages().currentPageAt(ItemsPage.class);
+			return getPages().currentPageAt(CategoriesPage.class);
 		default:
 			return null;
 		}
@@ -119,6 +108,18 @@ public class AbstractSteps extends ScenarioSteps {
 		case "mobile":
 			// mobile page object to be returned here
 			return getPages().currentPageAt(BookingsPage.class);
+		default:
+			return null;
+		}
+	}
+	
+	public LoginPage getLoginPage() {
+		switch (System.getProperty("runPlatform")) {
+		case "desktop":
+			return getPages().currentPageAt(LoginPage.class);
+		case "mobile":
+			// mobile page object to be returned here
+			return getPages().currentPageAt(LoginPage.class);
 		default:
 			return null;
 		}

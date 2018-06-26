@@ -10,7 +10,7 @@ import com.entities.Category;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 
-public class ItemsPage extends PageObject {
+public class CategoriesPage extends PageObject {
 	
 	@FindBy(css = "span#add-category")
 	private WebElement addCategoryButton;
@@ -21,32 +21,46 @@ public class ItemsPage extends PageObject {
 	@FindBy(css = "div#categories_page ul#categories_container li h3 a")
 	private List<WebElement> categoriesNameList;
 	
-	public void clickAddCategoryButton() {
-		addCategoryButton.click();
+	@FindBy(css = "div.collection-action-container > span span[class$='label']")
+	private List<WebElement> actionsList;
+	
+//	public void clickAddCategoryButton() {
+//		addCategoryButton.click();
+//	}
+//	
+//	public void clickAddItemButton() {
+//		addItemButton.click();
+//	}
+	
+	//TO DO change to select categoryAction
+
+	public void selectCategoryAction(String actionName) {
+		for(WebElement action : actionsList) {
+			if(action.getText().toLowerCase().contentEquals(actionName.toLowerCase())) {
+				action.click();
+				break;
+			}
+		}
 	}
 	
-	public void clickAddItemButton() {
-		addItemButton.click();
-	}
-
-	public void categoryExists(Category category) {
-		boolean categoryFound = false;
+	public boolean categoryExists(Category category) {
 		for(WebElement name : categoriesNameList) {
 			if(name.getText().toLowerCase().contentEquals(category.getName().toLowerCase())) {
-				categoryFound = true;
-				break;
+				return true;
 			}
 		}
-		Assert.assertTrue(categoryFound);
+		return false;
 	}
 
-	public void navigateToCategory(Category category) {
+	public WebElement getCategory(Category category) {
 		for(WebElement name : categoriesNameList) {
 			if(name.getText().toLowerCase().contentEquals(category.getName().toLowerCase())) {
-				name.click();
-				break;
+				return name;
 			}
 		}
+		return null;
 	}
+	
+	
 
 }

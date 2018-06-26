@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 
 import com.entities.Category;
 import com.entities.Item;
+import com.steps.CategoriesSteps;
 import com.steps.HomePageSteps;
 import com.steps.ItemSteps;
 import com.steps.LoginSteps;
@@ -30,15 +31,17 @@ public class Test03_UI_CreateItem  extends BaseTest {
 	public LoginSteps loginSteps;
 	@Steps
 	public ItemSteps itemSteps;
+	@Steps
+	public CategoriesSteps categoriesSteps;
 	
 	@Test
 	public void test03_UI_createItem() throws InterruptedException {
 		apiLoginSteps.loginAsAdmin();
 		Category category = apiCategorySteps.createCategory();
 		loginSteps.loginAsAdmin();
-		homePageSteps.navigateToItemsPage();
+		homePageSteps.selectMenuOption("ITEMS");
 		Item item = itemSteps.createItem(category);
-		itemSteps.navigateToCategory(category);
+		categoriesSteps.navigateToCategory(category);
 		itemSteps.verifyItemExists(item);
 	}
 }

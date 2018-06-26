@@ -14,15 +14,12 @@ public class BaseTest {
 		if(System.getProperty("runPlatform") == null) {
 			System.setProperty("runPlatform", "desktop");
 		}
+		
 		System.setProperty("http.proxyHost", "localhost");
 		System.setProperty("http.proxyPort", "8080");
 		System.setProperty("https.proxyHost", "localhost");
 		System.setProperty("https.proxyPort", "8080");
 	}
 	
-//	@After
-//	public void tearDown() {
-//		webdriver.quit();
-//	}
 
 }

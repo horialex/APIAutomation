@@ -30,10 +30,10 @@ public class Test04_CreateBookingRequest extends BaseTest{
 	
 	@Test
 	public void test04_CreateBookingRequest() {
-		User user = apiLoginSteps.loginAsAdminUser();
+		apiLoginSteps.loginAsAdminUser();
 		Category category = apiCategorySteps.createCategory();
 		Item item = apiItemSteps.createItem(category);
-		Booking booking = apiBookingSteps.createBookingRequest(item, user);
+		Booking booking = apiBookingSteps.createBookingRequest(item);
 	}
 
 }
