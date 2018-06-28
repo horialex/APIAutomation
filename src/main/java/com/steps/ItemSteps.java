@@ -18,9 +18,6 @@ public class ItemSteps extends AbstractSteps {
 		return category;
 	}
 
-	public void verifyCategoryExists(Category category) {
-		getItemPage().categoryExists(category);
-	}
 
 	@Step
 	public Item createItem(Category category) {
@@ -31,14 +28,15 @@ public class ItemSteps extends AbstractSteps {
 		return item;
 	}
 	
-	@Step
-	public void navigateToCategory(Category category) {
-		getItemPage().navigateToCategory(category);
-	}
 	
 	@Step
 	public void verifyItemExists(Item item) {
 		getCategoryPage().itemExists(item);
+	}
+	
+	@Step
+	public void validateItem() {
+		
 	}
 	
 	

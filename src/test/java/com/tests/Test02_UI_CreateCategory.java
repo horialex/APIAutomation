@@ -4,8 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.entities.Category;
+import com.steps.CategorySteps;
 import com.steps.HomePageSteps;
-import com.steps.ItemSteps;
 import com.steps.LoginSteps;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -19,13 +19,13 @@ public class Test02_UI_CreateCategory extends BaseTest {
 	@Steps
 	public LoginSteps loginSteps;
 	@Steps
-	public ItemSteps itemSteps;
+	public CategorySteps categorySteps;
 	
 	@Test
 	public void test02_UI_CreateCategory() {
 		loginSteps.loginAsAdmin();
 		homePageSteps.navigateToItemsPage();
-		Category category = itemSteps.createCategory();
+		Category category = categorySteps.createCategory();
 		webdriver.navigate().refresh();
 		itemSteps.verifyCategoryExists(category);
 	}
