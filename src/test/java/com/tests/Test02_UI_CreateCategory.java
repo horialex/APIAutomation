@@ -27,7 +27,7 @@ public class Test02_UI_CreateCategory extends BaseTest {
 		homePageSteps.navigateToItemsPage();
 		Category category = categorySteps.createCategory();
 		webdriver.navigate().refresh();
-		itemSteps.verifyCategoryExists(category);
+		categorySteps.verifyCategoryExists(category);
 	}
 
 }

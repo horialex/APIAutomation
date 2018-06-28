@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import com.entities.Category;
 import com.entities.Item;
 import com.steps.BookingSteps;
+import com.steps.CategorySteps;
 import com.steps.HomePageSteps;
 import com.steps.ItemSteps;
 import com.steps.LoginSteps;
@@ -33,6 +34,8 @@ public class Test04_UI_CreateBookingRequest extends BaseTest {
 	public ItemSteps itemSteps;
 	@Steps
 	public BookingSteps bookingSteps;
+	@Steps
+	public CategorySteps categorySteps;
 
 	@Test
 	public void test04_UT_createBookingRequest() throws InterruptedException {
@@ -41,7 +44,7 @@ public class Test04_UI_CreateBookingRequest extends BaseTest {
 		Item item = apiItemSteps.createItem(category);
 		loginSteps.loginAsAdmin();
 		homePageSteps.navigateToItemsPage();
-		itemSteps.navigateToCategory(category);
+		categorySteps.navigateToCategory(category);
 		itemSteps.bookItem(item);
 		homePageSteps.navigateToBookingsPage();
 		bookingSteps.navigateToMyBookingsTab();
