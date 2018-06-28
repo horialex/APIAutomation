@@ -10,25 +10,16 @@ import net.thucydides.core.annotations.Step;
 public class ItemSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 	
-	@Step()
-	public Category createCategory() {
-		Category category = ApiEntityFactory.getCategoryInstance();
-		getItemPage().clickAddCategoryButton();
-		getCreateCategoryPage().createCategory(category);
-		return category;
-	}
 
 
 	@Step
 	public Item createItem(Category category) {
 		Item item = ApiEntityFactory.getItemInstance();
 		item.setCategory_id(category.getId());
-		getItemPage().clickAddItemButton();
+		getCategoriesPage().selectCategoryAction("Add Item");
 		getCreateItemPage().createItem(item, category);
 		return item;
 	}
-	
-	
 	@Step
 	public void verifyItemExists(Item item) {
 		getCategoryPage().itemExists(item);
@@ -41,11 +32,9 @@ public class ItemSteps extends AbstractSteps {
 	
 	
 	@Step
-	public void bookItem(Item item){
+	public void bookItem(Item item) {
 		Booking booking = ApiEntityFactory.getBooking();
 		getCategoryPage().clickBookItem(item);
 		getCreateBookingPage().createBooking(booking);
 	}
-	
-
 }

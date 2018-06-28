@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import com.entities.Category;
 import com.entities.Item;
 import com.steps.CategorySteps;
+//github.com/horialex/APIAutomation.git
 import com.steps.HomePageSteps;
 import com.steps.ItemSteps;
 import com.steps.LoginSteps;
@@ -39,7 +40,7 @@ public class Test03_UI_CreateItem  extends BaseTest {
 		apiLoginSteps.loginAsAdmin();
 		Category category = apiCategorySteps.createCategory();
 		loginSteps.loginAsAdmin();
-		homePageSteps.navigateToItemsPage();
+		homePageSteps.selectMenuOption("ITEMS");
 		Item item = itemSteps.createItem(category);
 		categorySteps.navigateToCategory(category);
 		itemSteps.verifyItemExists(item);

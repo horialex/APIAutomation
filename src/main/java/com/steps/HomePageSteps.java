@@ -11,12 +11,7 @@ public class HomePageSteps extends AbstractSteps {
 	}
 	
 	@Step()
-	public void navigateToItemsPage() {
-		getHeaderPage().clickItemsMenu();
-	}
-	
-	@Step()
-	public void navigateToBookingsPage() {
-		getHeaderPage().clickBookingsMenu();
+	public void selectMenuOption(String option) {
+		getHeaderPage().selectMenuOption(option);
 	}
 }

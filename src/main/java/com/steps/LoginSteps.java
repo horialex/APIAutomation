@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.entities.User;
 import com.factories.ApiEntityFactory;
+import com.tools.constants.EnvironmentConstants;
 
 import net.thucydides.core.annotations.Step;
 
@@ -14,10 +15,10 @@ public class LoginSteps extends AbstractSteps {
 	public void loginAsAdmin() {
 		getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		getDriver().manage().window().maximize();
-		getDriver().get("https://wwtest.evozon.com");
+		getDriver().get(EnvironmentConstants.BASE_URL);
 		getHomePage().clickLoginButton();
 		User adminUser = ApiEntityFactory.getAdminUser();
-		getHomePage().login(adminUser.getEmail(), adminUser.getPassword());
+		getLoginPage().login(adminUser.getEmail(), adminUser.getPassword());
 	}
 	
 	@Step()

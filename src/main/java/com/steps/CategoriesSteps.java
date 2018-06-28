@@ -3,12 +3,11 @@ package com.steps;
 import org.junit.Assert;
 
 import com.entities.Category;
-import com.factories.ApiEntityFactory;
 import com.factories.CategoryEntitiyFactory;
 
 import net.thucydides.core.annotations.Step;
 
-public class CategorySteps extends AbstractSteps {
+public class CategoriesSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 	
 	@Step()
@@ -30,5 +29,4 @@ public class CategorySteps extends AbstractSteps {
 		getCategoriesPage().getCategory(category).click();
 	}
 	
-
 }

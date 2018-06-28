@@ -16,6 +16,9 @@ public class BookingsPage extends PageObject {
 
 	@FindBy(css = "div[class*='booking-tab-content'] ul[class*='bookings-listing'] div[class*='item-booking-container'] div[class*='booking-details-container']")
 	private List<WebElement> bookingsList;
+	
+	@FindBy(css = "ul[class='nav nav-tabs nav-decoration'] a")
+	private List<WebElement> bookingsActionList;
 
 	public void clickMyBookingsTab() {
 		myBookingsTab.click();
@@ -38,5 +41,13 @@ public class BookingsPage extends PageObject {
 			}
 		}
 		Assert.assertTrue(bookingItemFound);
+	}
+	
+	public void selectBookingAction(String actionName) {
+		for(WebElement action : bookingsActionList) {
+			if(action.getText().toLowerCase().contentEquals(actionName.toLowerCase())) {
+				action.click();
+			}
+		}
 	}
 }
