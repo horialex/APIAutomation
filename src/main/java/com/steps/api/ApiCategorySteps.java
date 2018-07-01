@@ -4,8 +4,10 @@ import com.entities.Category;
 import com.entities.Item;
 import com.entities.Login;
 import com.factories.ApiEntityFactory;
-import com.factories.CategoryEntitiyFactory;
+import com.factories.CategoryFactory;
 import com.tools.constants.ApiRequestPath;
+import com.tools.constants.SessionConstants;
+import com.tools.utils.SessionUtils;
 
 import net.thucydides.core.annotations.Step;
 
@@ -13,13 +15,23 @@ public class ApiCategorySteps extends AbstractApiSteps {
 
 	@Step
 	public Category createCategory() {
-		Category cateogoryRequest = CategoryEntitiyFactory.getCategoryInstance();
-		Category responseCategory = createResource(ApiRequestPath.CATEGORIES, cateogoryRequest, Category.class);
-		return responseCategory;
+		Category categoryRequest = CategoryFactory.getCategoryInstance();
+		Category categoryResponse = createResource(ApiRequestPath.CATEGORIES, categoryRequest, Category.class);
+		categoryRequest.setId(categoryResponse.getId());
+		
+		SessionUtils.putOnSession(SessionConstants.ACTUAL_CATEGORY, categoryResponse);
+	    SessionUtils.putOnSession(SessionConstants.EXPECTED_CATEGORY, categoryRequest);
+		return categoryResponse;
 	}
 
 	@Step
 	public void deleteCategory(Category category) {
+		deleteResource(ApiRequestPath.CATEGORIES,  category.getId());
+	}
+	
+	@Step
+	public void deleteCategory() {
+		Category category = SessionUtils.getFromSession(SessionConstants.ACTUAL_CATEGORY);
 		deleteResource(ApiRequestPath.CATEGORIES,  category.getId());
 	}
 

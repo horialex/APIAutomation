@@ -1,13 +1,36 @@
 package com.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
+	private int id;
 	private String email;
 	private String password;
-	private String fullName;
-	private int id;
+	private String name;
+	private String authenticationToken;
 	
+	@JsonProperty("name")
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@JsonProperty("authentication_token")
+	public String getAuthenticationToken() {
+		return authenticationToken;
+	}
+
+	public void setAuthenticationToken(String authenticationToken) {
+		this.authenticationToken = authenticationToken;
+	}
+
+	@JsonProperty("email")
 	public String getEmail() {
 		return email;
 	}
@@ -16,6 +39,7 @@ public class User {
 		this.email = email;
 	}
 
+	@JsonProperty("password")
 	public String getPassword() {
 		return password;
 	}
@@ -24,14 +48,7 @@ public class User {
 		this.password = password;
 	}
 
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
+	@JsonProperty("id")
 	public int getId() {
 		return id;
 	}
@@ -39,7 +56,5 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
 
 }

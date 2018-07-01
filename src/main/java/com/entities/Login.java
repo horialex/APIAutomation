@@ -1,7 +1,6 @@
 package com.entities;
 
 public class Login {
-
 	private User user;
 	
 	public User getUser() {
@@ -10,11 +9,6 @@ public class Login {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	@Override
-	public String toString() {
-		return "Login []";
 	}
 
 }

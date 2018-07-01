@@ -1,55 +1,47 @@
 package com.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Booking {
+	private String startDate;
+	private String endDate;
+	private int itemId;
+	private int userId;
+	private String clientTime;
 	private int id;
-	private String start_date;
-	private String end_date;
-	private int user_id;
-	private int item_id;
-	private String client_time;
+	private Item item;
+	private User user;
+	private String bookingStatus;
 
-	
-
-	public String getStart_date() {
-		return start_date;
+	@JsonProperty("user")
+	public User getUser() {
+		return user;
 	}
 
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public String getEnd_date() {
-		return end_date;
+	public String getBookingStatus() {
+		return bookingStatus;
 	}
 
-	public void setEnd_date(String end_date) {
-		this.end_date = end_date;
+	public void setBookingStatus(String bookingStatus) {
+		this.bookingStatus = bookingStatus;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	@JsonProperty("item")
+	public Item getItem() {
+		return item;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
-	public int getItem_id() {
-		return item_id;
-	}
-
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
-	}
-
-	public String getClient_time() {
-		return client_time;
-	}
-
-	public void setClient_time(String client_time) {
-		this.client_time = client_time;
-	}
-
+	@JsonProperty("id")
 	public int getId() {
 		return id;
 	}
@@ -57,7 +49,49 @@ public class Booking {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
-	
+
+	@JsonProperty("start_date")
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	@JsonProperty("end_date")
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	@JsonProperty("item_id")
+	public int getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+
+	@JsonProperty("user_id")
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	@JsonProperty("client_time")
+	public String getClientTime() {
+		return clientTime;
+	}
+
+	public void setClientTime(String clientTime) {
+		this.clientTime = clientTime;
+	}
 }

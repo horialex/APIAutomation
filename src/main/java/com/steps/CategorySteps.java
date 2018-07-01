@@ -3,24 +3,25 @@ package com.steps;
 import org.junit.Assert;
 
 import com.entities.Category;
-import com.factories.ApiEntityFactory;
-import com.factories.CategoryEntitiyFactory;
+import com.factories.CategoryFactory;
+import com.tools.constants.SessionConstants;
+import com.tools.utils.SessionUtils;
 
 import net.thucydides.core.annotations.Step;
 
 public class CategorySteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Step()
 	public Category createCategory() {
-		Category category = CategoryEntitiyFactory.getCategoryInstance();
+		Category category = CategoryFactory.getCategoryInstance();
 		getCategoriesPage().selectCategoryAction("Add Category");
 		getCreateCategoryPage().createCategory(category);
 		return category;
 	}
 
 	public void verifyCategoryPresence(Category category, boolean expected) {
-		boolean found =  getCategoriesPage().categoryExists(category);
+		boolean found = getCategoriesPage().categoryExists(category);
 		Assert.assertTrue(expected == found);
 	}
 
@@ -29,6 +30,12 @@ public class CategorySteps extends AbstractSteps {
 		verifyCategoryPresence(category, true);
 		getCategoriesPage().getCategory(category).click();
 	}
-	
+
+	@Step
+	public void selectCategory() {
+		Category category = SessionUtils.getFromSession(SessionConstants.EXPECTED_CATEGORY);
+		verifyCategoryPresence(category, true);
+		getCategoriesPage().getCategory(category).click();
+	}
 
 }

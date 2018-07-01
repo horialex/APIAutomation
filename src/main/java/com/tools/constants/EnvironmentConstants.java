@@ -10,5 +10,5 @@ public interface EnvironmentConstants {
 	public static final String MULTIPART_CODE = "208322840018787";	
 	public static final String MULTIPART_BOUNDRY = "boundary=---------------------------" + MULTIPART_CODE;
 	public static final String CSV_RESOURCES_PATH = "\\src\\test\\resources\\csv\\";
-	
+	public static final String BASE_URL_API = "https://wwtest.evozon.com/api";
 }

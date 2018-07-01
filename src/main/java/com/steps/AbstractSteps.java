@@ -1,14 +1,18 @@
 package com.steps;
 
-import com.entities.BookingsPage;
+import java.util.concurrent.TimeUnit;
+
+import com.pages.BookingsPage;
 import com.pages.CategoriesPage;
-import com.pages.CategoryPage;
+import com.pages.ItemsPage;
 import com.pages.CreateBookingPage;
 import com.pages.CreateCategoryPage;
 import com.pages.CreateItemPage;
 import com.pages.HeaderPage;
 import com.pages.HomePage;
 import com.pages.LoginPage;
+import com.pages.UsersPage;
+import com.tools.constants.EnvironmentConstants;
 
 import net.thucydides.core.steps.ScenarioSteps;
 
@@ -16,6 +20,11 @@ public class AbstractSteps extends ScenarioSteps {
 
 	private static final long serialVersionUID = 1L;
 
+	public void navigateHomePage(){
+		getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		getDriver().manage().window().maximize();
+		getDriver().get(EnvironmentConstants.BASE_URL);
+	}
 
 	public HomePage getHomePage() {
 		switch (System.getProperty("runPlatform")) {
@@ -77,13 +86,13 @@ public class AbstractSteps extends ScenarioSteps {
 		}
 	}
 	
-	public CategoryPage getCategoryPage() {
+	public ItemsPage getCategoryPage() {
 		switch (System.getProperty("runPlatform")) {
 		case "desktop":
-			return getPages().currentPageAt(CategoryPage.class);
+			return getPages().currentPageAt(ItemsPage.class);
 		case "mobile":
 			// mobile page object to be returned here
-			return getPages().currentPageAt(CategoryPage.class);
+			return getPages().currentPageAt(ItemsPage.class);
 		default:
 			return null;
 		}
@@ -120,6 +129,18 @@ public class AbstractSteps extends ScenarioSteps {
 		case "mobile":
 			// mobile page object to be returned here
 			return getPages().currentPageAt(LoginPage.class);
+		default:
+			return null;
+		}
+	}
+	
+	public UsersPage getUsersPage() {
+		switch (System.getProperty("runPlatform")) {
+		case "desktop":
+			return getPages().currentPageAt(UsersPage.class);
+		case "mobile":
+			// mobile page object to be returned here
+			return getPages().currentPageAt(UsersPage.class);
 		default:
 			return null;
 		}

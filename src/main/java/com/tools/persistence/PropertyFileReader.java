@@ -37,4 +37,33 @@ public class PropertyFileReader {
 		return value;
 	}
 	
+	public static String getTestConstantsItem(String key) {
+
+		String PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		String value = "";
+
+		try {
+			input = new FileInputStream(PATH + "testConstants.properties");
+			prop.load(input);
+
+			value = prop.getProperty(key);
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return value;
+	}
+	
 }

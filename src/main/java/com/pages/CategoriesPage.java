@@ -3,6 +3,7 @@ package com.pages;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.entities.Category;
@@ -24,14 +25,6 @@ public class CategoriesPage extends PageObject {
 	@FindBy(css = "div.collection-action-container > span span[class$='label']")
 	private List<WebElement> actionsList;
 	
-//	public void clickAddCategoryButton() {
-//		addCategoryButton.click();
-//	}
-//	
-//	public void clickAddItemButton() {
-//		addItemButton.click();
-//	}
-	
 	//TO DO change to select categoryAction
 
 	public void selectCategoryAction(String actionName) {
@@ -44,6 +37,8 @@ public class CategoriesPage extends PageObject {
 	}
 	
 	public boolean categoryExists(Category category) {
+		//Change here the wait method - create one abstract in AbstractPage
+		waitABit(2000);
 		for(WebElement name : categoriesNameList) {
 			if(name.getText().toLowerCase().contentEquals(category.getName().toLowerCase())) {
 				return true;
@@ -53,14 +48,13 @@ public class CategoriesPage extends PageObject {
 	}
 
 	public WebElement getCategory(Category category) {
-		for(WebElement name : categoriesNameList) {
+		for(WebElement name : getDriver().findElements(By.cssSelector("div#categories_page ul#categories_container li h3 a"))) {
 			if(name.getText().toLowerCase().contentEquals(category.getName().toLowerCase())) {
 				return name;
 			}
 		}
 		return null;
 	}
-	
 	
 
 }
