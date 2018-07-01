@@ -7,6 +7,7 @@ import com.steps.CategorySteps;
 import com.steps.HeaderSteps;
 import com.steps.ItemSteps;
 import com.steps.UserSteps;
+import com.steps.validations.SoftValidation;
 import com.tools.constants.SessionConstants;
 import com.tools.utils.SessionUtils;
 
@@ -25,6 +26,8 @@ public class ItemBookingSteps extends AbstractSteps {
 	ItemSteps itemSteps;
 	@Steps
 	UserSteps userSteps;
+	  @Steps
+	    SoftValidation softValidation;
 
 	@Step
 	public void verifyBooking(Item item) {
@@ -40,7 +43,13 @@ public class ItemBookingSteps extends AbstractSteps {
 	public void validateBooking() {
 		Booking expectedBooking = SessionUtils.getFromSession(SessionConstants.EXPECTED_BOOKING);
 		Booking actualdBooking = getBookingsPage().getBookingModel(expectedBooking);
-		//TO DO VALIDATION
+	
+		SoftValidation.verifyStringValues("booking status", expectedBooking.getBookingStatus(), actualdBooking.getBookingStatus());
+	    SoftValidation.verifyStringValues("end date", expectedBooking.getEndDate(), actualdBooking.getEndDate());
+	    SoftValidation.verifyStringValues("start date", expectedBooking.getStartDate(), actualdBooking.getStartDate());
+	    SoftValidation.verifyStringValues("user", expectedBooking.getUser().getName(), actualdBooking.getUser().getName());
+	    SoftValidation.verifyStringValues("item", expectedBooking.getItem().getTitle(), actualdBooking.getItem().getTitle());
+	    softValidation.printErrors();
 	}
 
 	@StepGroup
@@ -48,9 +57,8 @@ public class ItemBookingSteps extends AbstractSteps {
 		headerSteps.goTo("ITEMS");
 		categorySteps.selectCategory();
 		itemSteps.bookItem();
-		headerSteps.goTo("USERS");
-		userSteps.selectUser();
-
+//		headerSteps.goTo("USERS");
+		userSteps.navigateToUserPage();
 	}
 
 }

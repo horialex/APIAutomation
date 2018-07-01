@@ -4,12 +4,12 @@ import jxl.common.Assert;
 import jxl.common.Logger;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.StepFailureException;
-public class SoftValidations {
+public class SoftValidation {
 	
-	 final static Logger logger = Logger.getLogger(SoftValidations.class);
+	 final static Logger logger = Logger.getLogger(SoftValidation.class);
 	    static StringBuffer errorMessages;
 
-	    public SoftValidations() {
+	    public SoftValidation() {
 	        errorMessages = new StringBuffer("\n" +"------------------ SUMMARIZING ERRORS: ------------------");
 	    }
 

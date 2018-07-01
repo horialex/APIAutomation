@@ -15,5 +15,11 @@ public class UserSteps extends AbstractSteps {
 		User user = SessionUtils.getFromSession(SessionConstants.EXPECTED_USER);
 		getUsersPage().selectUser(user.getName());
 	}
+	
+	@Step
+	public void navigateToUserPage() {
+		User user = SessionUtils.getFromSession(SessionConstants.EXPECTED_USER);
+		getUsersPage().navigateToUserPage(user.getId());
+	}
 
 }

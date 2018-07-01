@@ -89,6 +89,7 @@ public class BookingsPage extends PageObject {
 	
 	 public Booking getBookingModel(Booking b){
 	        Booking bookingModel = new Booking();
+	        waitABit(1500);
 	        List<WebElementFacade> bookings = itemBookingsContainer.thenFindAll(By.cssSelector("div[class*='item-booking-container']"));
 	        for(WebElementFacade booking : bookings){
 	            String actualItemName = booking.find(By.cssSelector("div[class*='booking-details-container'] ul li:nth-child(1) a")).getText().trim();

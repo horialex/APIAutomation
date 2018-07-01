@@ -45,7 +45,6 @@ public class ApiLoginSteps extends AbstractApiSteps {
 	public void loginAdmin() {
 		AbstractApiSteps.extraHeaders.clear();
 		Login loginRequest = ApiEntityFactory.getLoginInstance();
-		
 		User userResponse = createResource(ApiRequestPath.LOGIN_PATH, loginRequest, User.class);
 		loginRequest.getUser().setId(userResponse.getId());
 		AbstractApiSteps.extraHeaders.put("Authorization", "Basic " + userResponse.getAuthenticationToken());
